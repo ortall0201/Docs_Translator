@@ -1,0 +1,11 @@
+/* src/styles/PDFViewer.css */
+.pdf-container {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+canvas {
+  border: 1px solid #ccc;
+  margin-bottom: 1rem;
+}
