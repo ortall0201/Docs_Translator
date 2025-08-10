@@ -20,3 +20,7 @@ dist/
 # === SYSTEM FILES ===
 .DS_Store
 Thumbs.db
+
+# === DEPLOYMENT FILES ===
+*.zip
+test_*.pdf

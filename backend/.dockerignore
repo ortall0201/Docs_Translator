@@ -1,0 +1,31 @@
+# Environment files - CRITICAL: Don't include .env!
+.env
+.env.local
+.env.production
+
+# Development files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+.pytest_cache/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+README.md
+
+# Temporary files
+uploads/*
+outputs/*
+test_run.py

@@ -1,6 +1,5 @@
-from crewai_tools import BaseTool
-
-class TranslationTool(BaseTool):
+# Temporarily simplified to avoid crewai_tools import issues
+class TranslationTool:
     name: str = "Translation Tool"
     description: str = "Translates text between languages using mocked logic."
 

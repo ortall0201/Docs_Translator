@@ -3,3 +3,5 @@ uvicorn
 openai
 crewai
 python-dotenv
+google-cloud-aiplatform
+google-auth

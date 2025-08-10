@@ -1,0 +1,15 @@
+BACKEND DEPLOYMENT - runmydocker.com
+
+1. ZIP THIS ENTIRE FOLDER (backend/)
+2. Upload to runmydocker.com 
+3. Set Environment Variable: OPENAI_API_KEY=your_actual_openai_key
+4. Container will run on port 8000
+5. Save the URL you get (needed for frontend)
+
+Files included:
+- Dockerfile (production ready)
+- src/ (all your FastAPI code)
+- requirements.txt
+- .dockerignore (excludes .env for security)
+
+IMPORTANT: Your .env file is NOT included in deployment for security!

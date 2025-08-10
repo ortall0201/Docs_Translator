@@ -1,0 +1,24 @@
+🚀 DEPLOYMENT CHECKLIST - runmydocker.com
+
+STEP 1: BACKEND DEPLOYMENT
+==========================
+📁 ZIP THIS FOLDER: C:\Users\user\Desktop\Docs_Translator\backend\
+📦 Upload to runmydocker.com
+🔧 Port: 8000
+🔐 Environment Variable:
+   Key: OPENAI_API_KEY
+   Value: [YOUR_ACTUAL_OPENAI_API_KEY]
+
+STEP 2: FRONTEND DEPLOYMENT 
+===========================
+📁 ZIP THIS FOLDER: C:\Users\user\Desktop\Docs_Translator\experiments\lovable_frontend\
+📦 Upload to runmydocker.com
+🔧 Port: 80
+🔐 Environment Variable:
+   Key: VITE_API_URL
+   Value: [YOUR_BACKEND_URL_FROM_STEP_1]
+
+EXAMPLE BACKEND URL: https://backend-abc123.runmydocker.com
+EXAMPLE FRONTEND URL: https://frontend-def456.runmydocker.com
+
+✅ Ready to deploy!

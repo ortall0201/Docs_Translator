@@ -1,0 +1,17 @@
+FRONTEND DEPLOYMENT - runmydocker.com
+
+1. ZIP THIS ENTIRE FOLDER (lovable_frontend/)
+2. Upload to runmydocker.com
+3. Set Environment Variable: VITE_API_URL=YOUR_BACKEND_URL_FROM_STEP1
+4. Container will run on port 80
+
+Example:
+VITE_API_URL=https://abc123.runmydocker.com
+
+Files included:
+- Dockerfile (production ready with Nginx)
+- src/ (all your React app with contact details & payment system)
+- nginx.conf (optimized for production)
+- .dockerignore (excludes node_modules)
+
+DEPLOY THIS SECOND (after backend is running)!

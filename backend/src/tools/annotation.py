@@ -1,6 +1,5 @@
-from crewai_tools import BaseTool
-
-class AnnotationTool(BaseTool):
+# Temporarily simplified to avoid crewai_tools import issues
+class AnnotationTool:
     name: str = "Annotation Tool"
     description: str = "Explains key form fields using a static glossary."
 
