@@ -10,15 +10,9 @@ import openai
 import os
 from dotenv import load_dotenv
 
-# Try to import GCP translator, but continue without it if not available
-try:
-    from gcp_translator import gcp_translator
-    GCP_AVAILABLE = True
-    print("[DEBUG] DEBUG: GCP Translator loaded successfully")
-except ImportError as e:
-    print(f"[DEBUG] DEBUG: GCP Translator not available: {e}")
-    GCP_AVAILABLE = False
-    gcp_translator = None
+# GCP Translator disabled for production deployment
+GCP_AVAILABLE = False
+print("[DEBUG] DEBUG: GCP Translator disabled for production")
 
 # Load environment variables
 load_dotenv()
@@ -852,6 +846,11 @@ async def preview_file(filename: str):
     
     print(f"[ERROR] DEBUG: Preview file not found: {file_path}")
     return JSONResponse(status_code=404, content={"error": "File not found"})
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint for container monitoring"""
+    return {"status": "healthy", "message": "Docs Translator API is running"}
 
 @app.get("/download/{filename}")
 @app.head("/download/{filename}")
