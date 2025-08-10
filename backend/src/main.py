@@ -608,18 +608,9 @@ async def translate_form(filename: str = Form(...), lang: str = Form(...)):
         return JSONResponse(status_code=500, content={"error": f"PDF parsing failed: {str(e)}"})
 
     try:
-        # Try GCP first if available, otherwise use OpenAI
-        if GCP_AVAILABLE and gcp_translator:
-            print(f"[DEBUG] DEBUG: Starting GCP Vertex AI translation...")
-            try:
-                translated_text = await gcp_translator.translate_text(content, lang)
-            except Exception as gcp_error:
-                print(f"[ERROR] DEBUG: GCP translation failed: {gcp_error}")
-                print(f"[DEBUG] DEBUG: Falling back to OpenAI translation...")
-                translated_text = await translate_text_with_openai(content, lang)
-        else:
-            print(f"[DEBUG] DEBUG: Starting OpenAI translation (GCP not available)...")
-            translated_text = await translate_text_with_openai(content, lang)
+        # Use OpenAI for translation (GCP disabled for production)
+        print(f"[DEBUG] DEBUG: Starting OpenAI translation...")
+        translated_text = await translate_text_with_openai(content, lang)
         print(f"[DEBUG] DEBUG: Translation completed, length: {len(translated_text) if translated_text else 'None'}")
         print("[DEBUG] DEBUG: Translation preview skipped due to Unicode encoding issues on Windows")
         
