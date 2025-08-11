@@ -4,3 +4,4 @@ openai
 crewai
 python-dotenv
 PyMuPDF
+python-multipart
