@@ -1,0 +1,19 @@
+# Minimal test Dockerfile for fast startup
+FROM python:3.13-slim
+
+WORKDIR /app
+
+# Install only essential dependencies
+RUN pip install --no-cache-dir fastapi uvicorn python-dotenv
+
+# Copy only main.py for testing
+COPY src/main.py ./src/main.py
+
+# Create basic directories
+RUN mkdir -p uploads outputs
+
+# Expose port
+EXPOSE 8000
+
+# Simple startup test
+CMD ["python", "-c", "print('Container started successfully!')"]
