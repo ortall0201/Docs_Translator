@@ -26,12 +26,17 @@ app = FastAPI()
 async def root():
     return {"message": "Docs Translator backend is running!"}
 
-# Allow frontend
+# Allow frontend - specific origins to avoid runmydocker CORS conflicts
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "https://docs-translator-frontend.runmydocker-app.com",
+        "https://docs-translator-frontend-v3.runmydocker-app.com",
+        "http://localhost:3000",
+        "http://localhost:8080"
+    ],
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
