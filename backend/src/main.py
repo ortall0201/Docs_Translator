@@ -1,6 +1,7 @@
 # src/main.py - FastAPI backend for doc translator with CrewAI integration
 
 from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from pathlib import Path
 import shutil
@@ -20,14 +21,22 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 # Initialize app
 app = FastAPI()
 
+# Add CORS middleware for Render deployment
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
 # Health check route
 @app.get("/")
 async def root():
     return {"message": "Docs Translator backend is running!"}
 
-# CORS disabled - runmydocker.com platform handles CORS automatically
-# Adding our own CORS causes duplicate headers: '*, https://origin'
-# Let the platform handle CORS to avoid conflicts
+# CORS now enabled for Render.com deployment
+# Render doesn't handle CORS automatically like runmydocker.com did
 
 # Directories
 UPLOAD_DIR = Path("uploads")
