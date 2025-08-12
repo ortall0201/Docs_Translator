@@ -1,0 +1,55 @@
+🚀 EASYDOC DEPLOYMENT - DockerHub + runmydocker.com
+
+STEP 1: SETUP GITHUB SECRETS
+=============================
+Go to GitHub repo Settings > Secrets and variables > Actions
+Add these secrets:
+- DOCKERHUB_USERNAME: [your dockerhub username]
+- DOCKERHUB_TOKEN: [your dockerhub access token]
+
+STEP 2: COMMIT AND PUSH TO GITHUB
+==================================
+1. Git add all files
+2. Git commit with message "Deploy easydoc containers"  
+3. Git push to main branch
+4. GitHub Actions will automatically build and push Docker images to DockerHub
+
+STEP 3: DEPLOY BACKEND CONTAINER
+=================================
+🐳 DOCKER IMAGE: [your-dockerhub-username]/easydoc-backend:latest
+🔧 PORT: 8000
+🌐 CONTAINER NAME: easydoc-backend
+🔐 Environment Variable:
+   Key: OPENAI_API_KEY
+   Value: [YOUR_ACTUAL_OPENAI_API_KEY]
+
+On runmydocker.com:
+1. Create new container from DockerHub image
+2. Image: [your-dockerhub-username]/easydoc-backend:latest
+3. Container name: easydoc-backend
+4. Port: 8000
+5. Add environment variable: OPENAI_API_KEY
+
+STEP 4: DEPLOY FRONTEND CONTAINER
+=================================
+🐳 DOCKER IMAGE: [your-dockerhub-username]/easydoc-frontend:latest
+🔧 PORT: 80
+🌐 CONTAINER NAME: easydoc-frontend
+
+On runmydocker.com:
+1. Create new container from DockerHub image  
+2. Image: [your-dockerhub-username]/easydoc-frontend:latest
+3. Container name: easydoc-frontend
+4. Port: 80
+5. No environment variables needed (backend URL is hardcoded)
+
+EXPECTED URLS:
+==============
+Backend: https://easydoc-backend.runmydocker-app.com
+Frontend: https://easydoc-frontend.runmydocker-app.com
+
+✅ Ready to deploy from DockerHub!
+
+WORKFLOW:
+=========
+Code → GitHub → GitHub Actions → DockerHub → runmydocker.com

@@ -4,11 +4,8 @@ import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
-// Set up PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.js',
-  import.meta.url,
-).toString();
+// Set up PDF.js worker - use CDN to avoid MIME type issues with local worker
+pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 interface PDFPreviewProps {
   fileUrl: string;
@@ -147,6 +144,17 @@ export const PDFPreview: React.FC<PDFPreviewProps> = ({ fileUrl, title = "PDF Pr
           
           {/* Controls */}
           <div className="flex items-center space-x-2">
+            {/* Open HTML Preview Button for RTL languages */}
+            {isHtmlContent && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => window.open(fileUrl, '_blank')}
+                className="text-sm"
+              >
+                Open Print/PDF Preview
+              </Button>
+            )}
             {/* Zoom Controls */}
             <div className="flex items-center space-x-1 bg-muted/50 rounded-lg p-1">
               <Button
