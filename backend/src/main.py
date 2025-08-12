@@ -553,8 +553,12 @@ async def translate_text_with_openai(text: str, target_lang: str) -> str:
         return response.choices[0].message.content
         
     except Exception as e:
-        print(f"Translation error: {e}")
-        return f"[Translation to {target_language}]\n\n{text}\n\n[Note: This is a fallback - AI translation failed]"
+        print(f"[ERROR] DEBUG: OpenAI Translation error: {e}")
+        print(f"[ERROR] DEBUG: Error type: {type(e)}")
+        print(f"[ERROR] DEBUG: OpenAI API key set: {'Yes' if openai.api_key else 'No'}")
+        import traceback
+        traceback.print_exc()
+        return f"[Translation to {target_language}]\n\n{text}\n\n[Note: This is a fallback - AI translation failed: {str(e)}]"
 
 @app.post("/translate")
 async def translate_form(filename: str = Form(...), lang: str = Form(...)):
