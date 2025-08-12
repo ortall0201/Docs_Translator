@@ -30,6 +30,7 @@ async def root():
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
+        "https://translate-doc.runmydocker-app.com",
         "https://transladoc.runmydocker-app.com",
         "https://docs-translator-frontend.runmydocker-app.com",
         "https://docs-translator-frontend-v3.runmydocker-app.com",
