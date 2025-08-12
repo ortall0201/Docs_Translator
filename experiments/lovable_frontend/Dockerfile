@@ -13,7 +13,7 @@ RUN npm ci --include=dev
 COPY . .
 
 # Set the environment variable for production build
-ENV VITE_API_URL=https://docs-translator-backend-v2.runmydocker-app.com
+ENV VITE_API_URL=https://back.runmydocker-app.com
 
 # Build the app
 RUN npm run build
