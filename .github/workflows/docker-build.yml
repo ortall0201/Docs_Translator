@@ -9,7 +9,7 @@ on:
 env:
   REGISTRY: docker.io
   BACKEND_IMAGE_NAME: doc-in-backend-v2
-  FRONTEND_IMAGE_NAME: doc-in-frontend-v2
+  FRONTEND_IMAGE_NAME: ortal-translator-ui
 
 jobs:
   build-backend:
