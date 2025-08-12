@@ -99,7 +99,21 @@ const Index = () => {
         throw new Error('Translation failed');
       }
       
-      const translateResult = await translateResponse.json();
+      // Debug: check response content type and first part of response
+      const contentType = translateResponse.headers.get('content-type');
+      console.log('[DEBUG] DEBUG: Response content-type:', contentType);
+      
+      const responseText = await translateResponse.text();
+      console.log('[DEBUG] DEBUG: Response text (first 200 chars):', responseText.substring(0, 200));
+      
+      let translateResult;
+      try {
+        translateResult = JSON.parse(responseText);
+      } catch (parseError) {
+        console.error('[ERROR] DEBUG: JSON parsing failed');
+        console.error('[ERROR] DEBUG: Full response text:', responseText);
+        throw parseError;
+      }
       console.log('[DEBUG] DEBUG: Translation completed, result:', translateResult);
       console.log('[DEBUG] DEBUG: Extracted translated_file:', translateResult.translated_file);
       setTranslatedFile(translateResult.translated_file);
