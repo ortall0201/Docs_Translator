@@ -9,7 +9,7 @@ on:
 env:
   REGISTRY: docker.io
   BACKEND_IMAGE_NAME: backtransly
-  FRONTEND_IMAGE_NAME: transly
+  FRONTEND_IMAGE_NAME: ortransly
 
 jobs:
   build-backend:
