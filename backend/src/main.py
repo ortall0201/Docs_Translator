@@ -2,7 +2,6 @@
 
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.responses import FileResponse, JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 import shutil
 import fitz  # PyMuPDF
@@ -26,21 +25,9 @@ app = FastAPI()
 async def root():
     return {"message": "Docs Translator backend is running!"}
 
-# Allow frontend - specific origins to avoid runmydocker CORS conflicts
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "https://translate-doc.runmydocker-app.com",
-        "https://transladoc.runmydocker-app.com",
-        "https://docs-translator-frontend.runmydocker-app.com",
-        "https://docs-translator-frontend-v3.runmydocker-app.com",
-        "http://localhost:3000",
-        "http://localhost:8080"
-    ],
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["*"],
-)
+# CORS disabled - runmydocker.com platform handles CORS automatically
+# Adding our own CORS causes duplicate headers: '*, https://origin'
+# Let the platform handle CORS to avoid conflicts
 
 # Directories
 UPLOAD_DIR = Path("uploads")
