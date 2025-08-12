@@ -54,5 +54,5 @@ jobs:
         file: ./experiments/lovable_frontend/Dockerfile
         push: true
         tags: |
-          ortalyy/easydoc-frontend2:latest
-          ortalyy/easydoc-frontend2:${{ github.sha }}
+          ortalyy/easydoc-frontend3:latest
+          ortalyy/easydoc-frontend3:${{ github.sha }}
