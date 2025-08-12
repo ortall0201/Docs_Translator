@@ -540,6 +540,8 @@ async def translate_text_with_openai(text: str, target_lang: str) -> str:
         
         from openai import OpenAI
         client = OpenAI()
+        print(f"[DEBUG] DEBUG: OpenAI client created, calling API...")
+        print(f"[DEBUG] DEBUG: Translating {len(text)} characters to {target_language}")
         
         response = client.chat.completions.create(
             model="gpt-4",
@@ -835,10 +837,7 @@ async def preview_file(filename: str):
             path=file_path, 
             filename=filename,
             headers={
-                "Content-Disposition": "inline",  # Display in browser instead of download
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
-                "Access-Control-Allow-Headers": "*"
+                "Content-Disposition": "inline"  # Display in browser instead of download
             }
         )
     
