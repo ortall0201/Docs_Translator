@@ -419,7 +419,7 @@ async def create_readable_hebrew_pdf(translated_text: str, lang: str, output_pat
         print(f"[DEBUG] DEBUG: Requesting English description of Hebrew content...")
         
         description_response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": "You are a document description expert. Provide a clear English description of Hebrew text content, explaining what the Hebrew text says and means. Make it professional and informative."},
                 {"role": "user", "content": f"Please provide a clear English description of what this Hebrew text contains: {translated_text}"}
@@ -544,7 +544,7 @@ async def translate_text_with_openai(text: str, target_lang: str) -> str:
         print(f"[DEBUG] DEBUG: Translating {len(text)} characters to {target_language}")
         
         response = client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o",
             messages=[
                 {"role": "system", "content": f"You are a professional document translator. Translate the following text to {target_language}. Maintain the original formatting and structure. For bureaucratic or technical terms, provide clear translations but preserve important official terminology."},
                 {"role": "user", "content": text}
