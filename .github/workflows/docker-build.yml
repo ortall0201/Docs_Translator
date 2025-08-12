@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: docker.io
-  BACKEND_IMAGE_NAME: back
+  BACKEND_IMAGE_NAME: translatdoc
   FRONTEND_IMAGE_NAME: transladoc
 
 jobs:
