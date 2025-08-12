@@ -558,7 +558,12 @@ async def translate_text_with_openai(text: str, target_lang: str) -> str:
         print(f"[ERROR] DEBUG: OpenAI API key set: {'Yes' if openai.api_key else 'No'}")
         import traceback
         traceback.print_exc()
-        return f"[Translation to {target_language}]\n\n{text}\n\n[Note: This is a fallback - AI translation failed: {str(e)}]"
+        # Create a simple mock translation for demonstration when API quota exceeded
+        if "insufficient_quota" in str(e) or "429" in str(e):
+            mock_translation = f"[DEMO TRANSLATION TO {target_language.upper()}]\n\nThis is a mock translation of your document. The original text has been processed but not translated due to API quota limits.\n\nOriginal document length: {len(text)} characters\n\nTo get actual translations, please check your OpenAI billing at https://platform.openai.com/account/billing\n\n[Original text would be translated here]\n\n--- End of demo translation ---"
+            return mock_translation
+        else:
+            return f"[Translation to {target_language}]\n\n{text}\n\n[Note: This is a fallback - AI translation failed: {str(e)}]"
 
 @app.post("/translate")
 async def translate_form(filename: str = Form(...), lang: str = Form(...)):
@@ -832,7 +837,7 @@ async def preview_file(filename: str):
             headers={
                 "Content-Disposition": "inline",  # Display in browser instead of download
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET",
+                "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
                 "Access-Control-Allow-Headers": "*"
             }
         )
