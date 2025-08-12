@@ -1,0 +1,57 @@
+🚀 DOCS4U DEPLOYMENT - Render.com
+
+STEP 1: DEPLOY BACKEND ON RENDER
+=================================
+1. Go to https://render.com
+2. Sign in with GitHub (connect ortall0201/Docs_Translator repo)
+3. Click "New" → "Web Service"
+4. Select "Deploy an existing image from a registry"
+5. Image URL: ortalyy/docs4u-backend:latest
+6. Service Name: docs4u-backend
+7. Region: Choose closest to you
+8. Instance Type: Free (or paid for better performance)
+9. Port: 8000
+10. Environment Variables:
+    - Key: OPENAI_API_KEY
+    - Value: [YOUR_OPENAI_API_KEY_FROM_BACKEND_.env_FILE]
+11. Click "Deploy"
+
+Expected URL: https://docs4u-backend.onrender.com
+
+STEP 2: UPDATE FRONTEND FOR RENDER BACKEND
+==========================================
+Need to update frontend to point to Render backend URL instead of runmydocker
+
+STEP 3: DEPLOY FRONTEND ON RENDER
+==================================
+1. Go to https://render.com
+2. Click "New" → "Static Site"
+3. Connect GitHub repo: ortall0201/Docs_Translator
+4. Root Directory: experiments/lovable_frontend
+5. Build Command: npm run build
+6. Publish Directory: dist
+7. Environment Variables:
+    - Key: VITE_API_URL
+    - Value: https://docs4u-backend.onrender.com
+8. Click "Deploy"
+
+Expected URL: https://docs4u-frontend.onrender.com
+
+ALTERNATIVE: Use Docker for Frontend too
+========================================
+If static site doesn't work, use Docker:
+1. "New" → "Web Service" 
+2. "Deploy existing image": ortalyy/docs4u-frontend:latest
+3. Port: 80
+4. No environment variables needed
+
+BENEFITS OF RENDER:
+===================
+- More reliable than runmydocker.com
+- Better Docker support
+- Free tier available
+- GitHub integration
+- Automatic deployments
+- Better networking/proxy
+
+✅ Try Render deployment!

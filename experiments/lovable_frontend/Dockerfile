@@ -13,7 +13,7 @@ RUN npm ci --include=dev
 COPY . .
 
 # Set the environment variable for production build
-ENV VITE_API_URL=https://docs4u-backend.runmydocker-app.com
+ENV VITE_API_URL=https://docs4u-backend.onrender.com
 
 # Build the app
 RUN npm run build
