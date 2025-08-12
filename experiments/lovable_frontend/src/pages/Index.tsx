@@ -86,6 +86,8 @@ const Index = () => {
       const translateResponse = await fetch(`${API_BASE_URL}/translate`, {
         method: 'POST',
         body: translateFormData,
+        // Increase timeout for large documents (5 minutes)
+        signal: AbortSignal.timeout(300000),
       });
       
       console.log('[DEBUG] DEBUG: Translation response status:', translateResponse.status);
