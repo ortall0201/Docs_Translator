@@ -652,7 +652,9 @@ async def translate_form(filename: str = Form(...), lang: str = Form(...)):
                 print(f"[DEBUG] DEBUG: Readable PDF creation successful")
                 
                 # Return PDF filename for download, but HTML will be available for preview
-                return {"translated_file": readable_pdf_result["pdf_file"], "html_preview": html_result["html_file"]}
+                response_data = {"translated_file": readable_pdf_result["pdf_file"], "html_preview": html_result["html_file"]}
+                print(f"[DEBUG] DEBUG: Returning JSON response: {response_data}")
+                return JSONResponse(content=response_data)
                 
             except Exception as hybrid_error:
                 print(f"[ERROR] DEBUG: Hybrid creation failed: {hybrid_error}")
@@ -767,7 +769,9 @@ async def translate_form(filename: str = Form(...), lang: str = Form(...)):
                 new_doc.close()
             raise save_error
         
-        return {"translated_file": output_path.name}
+        response_data = {"translated_file": output_path.name}
+        print(f"[DEBUG] DEBUG: Returning JSON response: {response_data}")
+        return JSONResponse(content=response_data)
     except Exception as e:
         print(f"Translation processing error: {e}")
         import traceback
