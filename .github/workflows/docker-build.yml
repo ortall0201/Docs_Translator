@@ -8,7 +8,7 @@ on:
 
 env:
   REGISTRY: docker.io
-  BACKEND_IMAGE_NAME: backly-v2
+  BACKEND_IMAGE_NAME: backly-v3
   FRONTEND_IMAGE_NAME: transdocly-v2
 
 jobs:
