@@ -8,8 +8,8 @@ on:
 
 env:
   REGISTRY: docker.io
-  BACKEND_IMAGE_NAME: backtransly
-  FRONTEND_IMAGE_NAME: ortransly
+  BACKEND_IMAGE_NAME: backly
+  FRONTEND_IMAGE_NAME: transdocly
 
 jobs:
   build-backend:
