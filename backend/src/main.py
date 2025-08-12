@@ -586,6 +586,13 @@ async def translate_form(filename: str = Form(...), lang: str = Form(...)):
     print(f"[DEBUG] DEBUG: Output path: {output_path}")
 
     try:
+        # Monitor memory usage for large documents
+        import psutil
+        import os
+        process = psutil.Process(os.getpid())
+        memory_before = process.memory_info().rss / 1024 / 1024  # MB
+        print(f"[DEBUG] DEBUG: Memory usage before processing: {memory_before:.1f} MB")
+        
         print(f"[DEBUG] DEBUG: Starting PDF text extraction...")
         # Extract text from PDF
         doc = fitz.open(input_path)
@@ -613,6 +620,10 @@ async def translate_form(filename: str = Form(...), lang: str = Form(...)):
         translated_text = await translate_text_with_openai(content, lang)
         print(f"[DEBUG] DEBUG: Translation completed, length: {len(translated_text) if translated_text else 'None'}")
         print("[DEBUG] DEBUG: Translation preview skipped due to Unicode encoding issues on Windows")
+        
+        # Monitor memory after translation
+        memory_after_translation = process.memory_info().rss / 1024 / 1024  # MB
+        print(f"[DEBUG] DEBUG: Memory usage after translation: {memory_after_translation:.1f} MB")
         
         print(f"[DEBUG] DEBUG: Starting PDF creation...")
         # Create a new PDF with the translated text using a more robust method
@@ -765,7 +776,18 @@ async def translate_form(filename: str = Form(...), lang: str = Form(...)):
         
         response_data = {"translated_file": output_path.name}
         print(f"[DEBUG] DEBUG: Returning JSON response: {response_data}")
-        return JSONResponse(content=response_data)
+        
+        # Ensure we return proper JSON response
+        try:
+            import json
+            json_str = json.dumps(response_data)
+            print(f"[DEBUG] DEBUG: JSON serialization successful, length: {len(json_str)}")
+            response = JSONResponse(content=response_data)
+            print(f"[DEBUG] DEBUG: JSONResponse created successfully")
+            return response
+        except Exception as json_error:
+            print(f"[ERROR] DEBUG: JSON response creation failed: {json_error}")
+            return JSONResponse(status_code=500, content={"error": f"Response serialization failed: {str(json_error)}"})
     except Exception as e:
         print(f"Translation processing error: {e}")
         import traceback

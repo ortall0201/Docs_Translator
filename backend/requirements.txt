@@ -5,3 +5,4 @@ crewai
 python-dotenv
 PyMuPDF
 python-multipart
+psutil
