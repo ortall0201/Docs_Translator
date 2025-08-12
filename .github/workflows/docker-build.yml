@@ -19,7 +19,7 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v3
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        username: ortalyy
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and push backend
@@ -29,8 +29,8 @@ jobs:
         file: ./backend/Dockerfile
         push: true
         tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/easydoc-backend:latest
-          ${{ secrets.DOCKERHUB_USERNAME }}/easydoc-backend:${{ github.sha }}
+          ortalyy/easydoc-backend:latest
+          ortalyy/easydoc-backend:${{ github.sha }}
 
   build-frontend:
     runs-on: ubuntu-latest
@@ -44,7 +44,7 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v3
       with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        username: ortalyy
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Build and push frontend
@@ -54,5 +54,5 @@ jobs:
         file: ./experiments/lovable_frontend/Dockerfile
         push: true
         tags: |
-          ${{ secrets.DOCKERHUB_USERNAME }}/easydoc-frontend:latest
-          ${{ secrets.DOCKERHUB_USERNAME }}/easydoc-frontend:${{ github.sha }}
+          ortalyy/easydoc-frontend:latest
+          ortalyy/easydoc-frontend:${{ github.sha }}
